@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SharpDX.Direct3D9;
 
 namespace Dune
@@ -22,15 +23,22 @@ namespace Dune
 
 		public void LoadTexture(string name, string filename)
 		{
-			var tex = Texture.FromFile(device, Path.Combine(path, filename));
-			if(tex != null)
+			try
 			{
-				Resource<Texture> texture = new Resource<Texture>()
+				var tex = Texture.FromFile(device, Path.Combine(path, filename));
+				if (tex != null)
 				{
-					Name = name,
-					Data = tex
-				};
-				resources.Add(texture);
+					Resource<Texture> texture = new Resource<Texture>()
+					{
+						Name = name,
+						Data = tex
+					};
+					resources.Add(texture);
+				}
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show($"Текстура не найдена: {filename}");
 			}
 		}
 		public void Dispose()

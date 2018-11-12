@@ -7,27 +7,46 @@ using System.Threading.Tasks;
 
 namespace Dune
 {
-	class SystemManager
+	class SystemManager : IDisposable
 	{
 		List<ComponentSystemBase> componentSystems;
-
+		private bool enabled;
+		private Task task;
 
 		public SystemManager(Renderer renderer)
 		{
 			componentSystems = new List<ComponentSystemBase>
 			{
 				new Transform2DSystem(),
-				new SpriteSystem()
+				new SpriteSystem(),
+				new AnimSpriteSystem()
 			};
 
 			renderer.Rendering += Rendering;
+
+			enabled = true;
+			task = Task.Run(new Action(Update));
 		}
 
-		public void Update(float time)
+		public void Dispose()
 		{
-			foreach (var system in componentSystems)
+			enabled = false;
+			task.Wait();
+		}
+
+		public void Update()
+		{
+			int oldTime = Environment.TickCount;
+			while (enabled)
 			{
-				system.Update(time);
+				int newTime = Environment.TickCount;
+				float time = (newTime - oldTime) * 0.001f;
+				oldTime = newTime;
+
+				foreach (var system in componentSystems)
+				{
+					system.Update(time);
+				}
 			}
 		}
 

@@ -16,7 +16,7 @@ namespace Dune
 	class ComponentSystem<T> : ComponentSystemBase where T : Component, new()
 	{
 		List<T> components = new List<T>();
-		protected List<T> Components => components;
+		protected List<T> Components => components.ToList();
 
 
 		public void Add(T component)
