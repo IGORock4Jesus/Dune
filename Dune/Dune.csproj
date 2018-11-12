@@ -58,7 +58,9 @@
     <Compile Include="Component.cs" />
     <Compile Include="ComponentNotFound.cs" />
     <Compile Include="Components\AnimSprite.cs" />
+    <Compile Include="Components\Button.cs" />
     <Compile Include="Components\Sprite.cs" />
+    <Compile Include="Components\Text.cs" />
     <Compile Include="Components\Transform2D.cs" />
     <Compile Include="Components\Vertex2D.cs" />
     <Compile Include="Entity.cs" />

@@ -11,6 +11,8 @@ namespace Dune
 		public virtual void Update(float time) { }
 
 		public virtual void Render(Renderer renderer) { }
+
+		public virtual void MouseClick(int x, int y) { }
 	}
 
 	class ComponentSystem<T> : ComponentSystemBase where T : Component, new()
@@ -29,10 +31,10 @@ namespace Dune
 			components.Remove(component);
 		}
 
-		public T Create(Entity entity)
+		public virtual T Create(Entity entity)
 		{
 			T t = new T();
-			t.Killed += Component_Killed;
+			t.Destroyed += Component_Killed;
 			entity.Add(t);
 			Add(t);
 			return t;

@@ -14,11 +14,16 @@ namespace Dune
 		public void InitializeBase(Entity entity) { Entity = entity; Initialize(entity); }
 
 		public delegate void ComponentHandler(Component component);
-		public event ComponentHandler Killed;
+		public event ComponentHandler Destroyed;
 
-		internal void Kill()
+		internal void Destroy()
 		{
-			Killed?.Invoke(this);
+			OnDestroy();
+			Destroyed?.Invoke(this);
+		}
+
+		protected virtual void OnDestroy()
+		{
 		}
 	}
 }

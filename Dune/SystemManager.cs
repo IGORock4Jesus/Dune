@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Dune
 {
@@ -13,19 +14,30 @@ namespace Dune
 		private bool enabled;
 		private Task task;
 
-		public SystemManager(Renderer renderer)
+		public SystemManager(Control control, Renderer renderer)
 		{
 			componentSystems = new List<ComponentSystemBase>
 			{
 				new Transform2DSystem(),
 				new SpriteSystem(),
-				new AnimSpriteSystem()
+				new AnimSpriteSystem(),
+				new TextSystem(renderer),
+				new ButtonSystem()
 			};
 
 			renderer.Rendering += Rendering;
+			control.MouseClick += Control_MouseClick;
 
 			enabled = true;
 			task = Task.Run(new Action(Update));
+		}
+
+		private void Control_MouseClick(object sender, MouseEventArgs e)
+		{
+			foreach (var s in componentSystems)
+			{
+				s.MouseClick(e.X, e.Y);
+			}
 		}
 
 		public void Dispose()

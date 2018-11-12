@@ -22,7 +22,7 @@ namespace Dune
 		{
 			foreach (var c in components)
 			{
-				c.Kill();
+				c.Destroy();
 			}
 		}
 
