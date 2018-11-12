@@ -13,6 +13,7 @@ namespace Dune
 		public virtual void Render(Renderer renderer) { }
 
 		public virtual void MouseClick(int x, int y) { }
+		public virtual void MouseMove(int x, int y) { }
 	}
 
 	class ComponentSystem<T> : ComponentSystemBase where T : Component, new()

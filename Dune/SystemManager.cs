@@ -27,9 +27,18 @@ namespace Dune
 
 			renderer.Rendering += Rendering;
 			control.MouseClick += Control_MouseClick;
+			control.MouseMove += Control_MouseMove;
 
 			enabled = true;
 			task = Task.Run(new Action(Update));
+		}
+
+		private void Control_MouseMove(object sender, MouseEventArgs e)
+		{
+			foreach (var s in componentSystems)
+			{
+				s.MouseMove(e.X, e.Y);
+			}
 		}
 
 		private void Control_MouseClick(object sender, MouseEventArgs e)

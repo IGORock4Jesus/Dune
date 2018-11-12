@@ -29,7 +29,7 @@ namespace Dune
 			renderer = new Renderer(this);
 			resourceManager = new ResourceManager(renderer.Device);
 			scene = new Scene();
-			systemManager = new SystemManager(renderer);
+			systemManager = new SystemManager(this, renderer);
 			screen = new Screen(ClientSize.Width, ClientSize.Height);
 
 			gameStack = new GameStack(renderer, resourceManager, systemManager, scene, screen);

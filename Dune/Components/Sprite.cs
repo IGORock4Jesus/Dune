@@ -13,6 +13,8 @@ namespace Dune.Components
 		private Transform2D transform;
 		public Vector2 Size { get; set; } = new Vector2(100);
 		public Texture Texture { get; set; }
+		public RectangleF TextureRect { get; set; } = new RectangleF(0.0f, 0.0f, 1.0f, 1.0f);
+
 
 		protected override void Initialize(Entity entity)
 		{
@@ -27,10 +29,10 @@ namespace Dune.Components
 
 				renderer.Device.DrawUserPrimitives(PrimitiveType.TriangleFan, 2, new Texture2DVertex[]
 				{
-					new Texture2DVertex{ position = new Vector4(transform.Position, 0.0f, 1.0f), texel = new Vector2(0.0f, 0.0f) },
-					new Texture2DVertex{position=new Vector4(transform.Position.X + Size.X, transform.Position.Y, 0.0f, 1.0f), texel = new Vector2(1.0f, 0.0f) },
-					new Texture2DVertex{position =new Vector4(transform.Position+Size, 0.0f, 1.0f), texel =new Vector2(1.0f) },
-					new Texture2DVertex{position=new Vector4(transform.Position.X, transform.Position.Y+Size.Y, 0.0f,1.0f), texel = new Vector2(0.0f, 1.0f) }
+					new Texture2DVertex{ position = new Vector4(transform.Position, 0.0f, 1.0f), texel = TextureRect.TopLeft },
+					new Texture2DVertex{position=new Vector4(transform.Position.X + Size.X, transform.Position.Y, 0.0f, 1.0f), texel =TextureRect.TopRight },
+					new Texture2DVertex{position =new Vector4(transform.Position+Size, 0.0f, 1.0f), texel =TextureRect.BottomRight },
+					new Texture2DVertex{position=new Vector4(transform.Position.X, transform.Position.Y+Size.Y, 0.0f,1.0f), texel = TextureRect.BottomLeft }
 				});
 			}
 		}
