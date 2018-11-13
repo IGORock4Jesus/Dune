@@ -15,9 +15,10 @@ namespace Dune
 		Renderer renderer;
 		ResourceManager resourceManager;
 		Scene scene;
-		private SystemManager systemManager;
+		HUD hud;
 		Screen screen;
 		GameStack gameStack;
+
 
 		public Form1()
 		{
@@ -29,10 +30,10 @@ namespace Dune
 			renderer = new Renderer(this);
 			resourceManager = new ResourceManager(renderer.Device);
 			scene = new Scene();
-			systemManager = new SystemManager(this, renderer);
+			hud = new HUD();
 			screen = new Screen(ClientSize.Width, ClientSize.Height);
 
-			gameStack = new GameStack(renderer, resourceManager, systemManager, scene, screen);
+			gameStack = new GameStack(renderer, resourceManager, hud, scene, screen);
 
 			gameStack.Push(gameStack.MakeItem<Game.LogoStackItem>());
 		}

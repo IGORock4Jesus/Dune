@@ -12,7 +12,7 @@ namespace Dune
 	{
 		Renderer renderer;
 		private readonly ResourceManager resourceManager;
-		private readonly SystemManager systemManager;
+		private readonly HUD hud;
 		private readonly Scene scene;
 		private readonly Screen screen;
 		Stack<GameStackItem> stack = new Stack<GameStackItem>();
@@ -21,11 +21,11 @@ namespace Dune
 		int poping = 0;
 
 
-		public GameStack(Renderer renderer, ResourceManager resourceManager, SystemManager systemManager, Scene scene, Screen screen)
+		public GameStack(Renderer renderer, ResourceManager resourceManager, HUD hud, Scene scene, Screen screen)
 		{
 			this.renderer = renderer;
 			this.resourceManager = resourceManager;
-			this.systemManager = systemManager;
+			this.hud = hud;
 			this.scene = scene;
 			this.screen = screen;
 			enabled = true;
@@ -83,7 +83,7 @@ namespace Dune
 			{
 				Renderer = renderer,
 				ResourceManager = resourceManager,
-				SystemManager = systemManager,
+				HUD = hud,
 				Scene = scene,
 				Screen = screen,
 				GameStack = this
@@ -115,7 +115,7 @@ namespace Dune
 	{
 		public Renderer Renderer { get; set; }
 		public ResourceManager ResourceManager { get; set; }
-		public SystemManager SystemManager { get; set; }
+		public HUD HUD { get; set; }
 		public Scene Scene { get; set; }
 		public Screen Screen { get; set; }
 		public GameStack GameStack { get; set; }

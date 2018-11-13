@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Components\AnimSprite.cs" />
     <Compile Include="Components\Button.cs" />
+    <Compile Include="UI\HUD.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="Components\Sprite.cs" />
     <Compile Include="Components\Text.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ResourceNotFound.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Screen.cs" />
+    <Compile Include="UI\UIElement.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

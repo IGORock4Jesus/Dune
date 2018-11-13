@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dune
 {
-	class Button 
+	class Button : UIElement, IDrawable
 	{
 		enum State
 		{
@@ -80,22 +80,4 @@ namespace Dune
 		}
 	}
 
-	class ButtonSystem : ComponentSystem<Button>
-	{
-		public override void MouseClick(int x, int y)
-		{
-			foreach (var item in Components)
-			{
-				item.OnClick(new Point(x, y));
-			}
-		}
-
-		public override void MouseMove(int x, int y)
-		{
-			foreach (var item in Components)
-			{
-				item.OnMouseMove(new Point(x, y));
-			}
-		}
-	}
 }
