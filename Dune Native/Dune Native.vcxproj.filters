@@ -9,6 +9,8 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Trivial.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="Event.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
@@ -18,5 +20,6 @@
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Label.cpp" />
   </ItemGroup>
 </Project>

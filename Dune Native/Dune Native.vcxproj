@@ -148,7 +148,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="MouseZone.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Sprite.h" />
@@ -160,6 +162,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="MouseZone.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />

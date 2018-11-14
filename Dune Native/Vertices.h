@@ -3,17 +3,17 @@
 #include <d3dx9.h>
 
 
-struct TextureVertex
+struct Texture2DVertex
 {
-	D3DXVECTOR3 position;
+	D3DXVECTOR4 position;
 	D3DXVECTOR2 texel;
 
 	//static const DWORD size;
 	//static const DWORD format;
 };
 
-constexpr DWORD TextureVertexSize = sizeof(TextureVertex);
-constexpr DWORD TextureVertexFormat = D3DFVF_XYZ | D3DFVF_TEX1;
+constexpr DWORD Texture2DVertexSize = sizeof(Texture2DVertex);
+constexpr DWORD Texture2DVertexFormat = D3DFVF_XYZRHW | D3DFVF_TEX1;
 
 
 

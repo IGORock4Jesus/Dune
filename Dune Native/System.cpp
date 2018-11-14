@@ -1,6 +1,7 @@
 #include "System.h"
 #include "Renderer.h"
-
+#include "Input.h"
+#include <windowsx.h>
 
 
 namespace System
@@ -29,6 +30,38 @@ LRESULT CALLBACK WndProc(HWND h, UINT m, WPARAM w, LPARAM l) {
 	case WM_PAINT:
 		Renderer::Rendering();
 		return 0;
+
+	case WM_KEYDOWN:
+		Input::KeyDown((int)w);
+		break;
+
+	case WM_KEYUP:
+		Input::KeyUp((int)w);
+		break;
+
+	case WM_LBUTTONDOWN:
+		Input::MouseDown(0);
+		break;
+	case WM_RBUTTONDOWN:
+		Input::MouseDown(1);
+		break;
+	case WM_MBUTTONDOWN:
+		Input::MouseDown(2);
+		break;
+
+	case WM_LBUTTONUP:
+		Input::MouseUp(0);
+		break;
+	case WM_RBUTTONUP:
+		Input::MouseUp(1);
+		break;
+	case WM_MBUTTONUP:
+		Input::MouseUp(2);
+		break;
+
+	case WM_MOUSEMOVE:
+		Input::MouseMove(GET_X_LPARAM(l), GET_Y_LPARAM(l));
+		break;
 
 	default:
 		return DefWindowProc(h, m, w, l);

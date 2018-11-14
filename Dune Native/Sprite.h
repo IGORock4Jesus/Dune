@@ -1,22 +1,20 @@
 #pragma once
 
 #include <d3dx9.h>
+#include "Trivial.h"
 
 
 class Sprite
 {
 	LPDIRECT3DTEXTURE9 texture;
-	D3DXVECTOR2 scalingCenter;
-	float scalingRotation;
-	D3DXVECTOR2 scaling;
-	D3DXVECTOR2 rotationCenter;
-	float rotation;
-	D3DXVECTOR2 translation;
+	FRECT rect;
+	FRECT textureRect{ 0.0f, 0.0f, 1.0f, 1.0f };
 
 public:
 	Sprite();
 	~Sprite();
 
+	void SetTexture(LPDIRECT3DTEXTURE9 texture);
 	void Render(LPDIRECT3DDEVICE9 device);
 };
 
