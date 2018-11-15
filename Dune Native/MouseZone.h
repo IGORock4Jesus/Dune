@@ -1,11 +1,11 @@
 #pragma once
 
 #include <Windows.h>
-
+#include "Trivial.h"
 
 class MouseZone
 {
-	RECT rect;
+	FRECT rect;
 
 public:
 	MouseZone();
@@ -13,7 +13,7 @@ public:
 
 	bool CheckHit(int x, int y);
 
-	void SetRect(RECT& rect);
+	void SetRect(FRECT& rect);
 
 };
 

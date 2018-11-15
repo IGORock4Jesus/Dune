@@ -16,5 +16,7 @@ public:
 
 	void SetTexture(LPDIRECT3DTEXTURE9 texture);
 	void Render(LPDIRECT3DDEVICE9 device);
+
+	void SetRect(FRECT& rect);
 };
 

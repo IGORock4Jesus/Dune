@@ -10,7 +10,7 @@ class Button
 	MouseZone mouseZone;
 	Sprite sprite;
 	Label label;
-	RECT rect;
+	FRECT rect;
 
 	void SetTexture(LPDIRECT3DTEXTURE9 texture);
 
@@ -18,6 +18,6 @@ public:
 	Button();
 	~Button();
 
-	void SetRect(RECT& rect);
+	void SetRect(FRECT& rect);
 };
 

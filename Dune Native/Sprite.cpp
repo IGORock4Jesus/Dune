@@ -31,3 +31,8 @@ void Sprite::Render(LPDIRECT3DDEVICE9 device)
 	};
 	device->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, vertices, Texture2DVertexSize);
 }
+
+void Sprite::SetRect(FRECT & rect)
+{
+	this->rect = rect;
+}

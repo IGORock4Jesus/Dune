@@ -1,14 +1,11 @@
-#include "Renderer.h"
-#include "Trivial.h"
+#include "RendererModule.h"
+#include "..\Trivial.h"
 
 
-namespace Renderer
+bool Renderer::OnInitialize(Module * dependencies[])
 {
-LPDIRECT3D9 direct;
-LPDIRECT3DDEVICE9 device;
+	window = (WindowModule*)dependencies[0];
 
-
-bool Initial(HWND hwnd) {
 	Log(L"Renderer::Initial");
 	if (!(direct = Direct3DCreate9(D3D_SDK_VERSION)))
 		return false;
@@ -18,25 +15,25 @@ bool Initial(HWND hwnd) {
 	pp.BackBufferCount = 1;
 	pp.BackBufferFormat = D3DFMT_X8R8G8B8;
 	RECT cr;
-	GetClientRect(hwnd, &cr);
+	GetClientRect(window->GetHandle(), &cr);
 	pp.BackBufferHeight = cr.bottom - cr.top;
 	pp.BackBufferWidth = cr.right - cr.left;
 	pp.EnableAutoDepthStencil = TRUE;
-	pp.hDeviceWindow = hwnd;
+	pp.hDeviceWindow = window->GetHandle();
 	pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	pp.Windowed = TRUE;
 
-	if (FAILED(direct->CreateDevice(0, D3DDEVTYPE_HAL, hwnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &pp, &device)))
+	if (FAILED(direct->CreateDevice(0, D3DDEVTYPE_HAL, window->GetHandle(), D3DCREATE_HARDWARE_VERTEXPROCESSING, &pp, &device)))
 		return false;
-
-
 
 	return true;
 }
-void Release() {
+
+void Renderer::OnRelease()
+{
 	Log(L"Renderer::Release");
 	if (direct) {
-		direct->Release(); 
+		direct->Release();
 		direct = nullptr;
 	}
 	if (device) {
@@ -44,7 +41,9 @@ void Release() {
 		device = nullptr;
 	}
 }
-void Rendering() {
+
+void Renderer::OnUpdate(float time)
+{
 	device->Clear(0, nullptr, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff404040, 1.0f, 0);
 	device->BeginScene();
 
@@ -52,4 +51,13 @@ void Rendering() {
 	device->EndScene();
 	device->Present(nullptr, nullptr, nullptr, nullptr);
 }
+
+std::vector<std::string> Renderer::GetDependencies()
+{
+	return { "Window" };
+}
+
+std::string Renderer::GetName()
+{
+	return "Renderer";
 }

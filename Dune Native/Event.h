@@ -67,28 +67,36 @@ class Event {
 		}
 	};
 
-	std::list<std::unique_ptr<Delegate>> delegates;
+	std::list<Delegate*> delegates;
 
 public:
+	~Event() {
+		for (auto p : delegates) {
+			delete p;
+		}
+	}
 	void Process(TArgs ...args) {
 		for (auto&& d : delegates) {
-			d.Process(args...);
+			d->Process(args...);
 		}
 	}
 
 	template <typename TFunc>
 	void Add(TFunc func) {
 		StaticDelegate<TFunc> *d = new StaticDelegate<TFunc>(func);
-		std::unique_ptr<Delegate> p{ d };
-		delegates.push_back(p);
+		delegates.push_back(d);
 	}
 
 	template <typename TFunc>
 	void Remove(TFunc func) {
-		delegates.remove_if([func](p) {
+		delegates.remove_if([func](Delegate* p) {
 			if (p->type == DelegateType::Static) {
-				auto s = std::dynamic_pointer_cast<StaticDelegate>(p);
-				return s->Compare(func);
+				auto s = (StaticDelegate*)p;
+				bool check = s->Compare(func);
+				if (check) {
+					delete s;
+					return true;
+				}
 			}
 			return false;
 		});
@@ -97,16 +105,19 @@ public:
 	template <typename TClass, typename TMethod>
 	void Add(TClass *object, TMethod method) {
 		ClassDelegate<TClass, TMethod> *d = new ClassDelegate<TClass, TMethod>(object, method);
-		std::unique_ptr<Delegate> p{ d };
-		delegates.push_back(p);
+		delegates.push_back(d);
 	}
 
 	template <typename TClass, typename TMethod>
 	void Remove(TClass *object, TMethod method) {
-		delegates.remove_if([func](p) {
+		delegates.remove_if([object, method](std::unique_ptr<Delegate>& p) {
 			if (p->type == DelegateType::Class) {
 				auto s = std::dynamic_pointer_cast<TClass, TMethod>(p);
-				return s->Compare(object, method);
+				bool check = s->Compare(object, method);
+				if (check) {
+					delete s;
+					return true;
+				}
 			}
 			return false;
 		});

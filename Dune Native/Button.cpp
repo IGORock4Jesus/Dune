@@ -16,7 +16,7 @@ Button::~Button()
 {
 }
 
-void Button::SetRect(RECT & rect)
+void Button::SetRect(FRECT & rect)
 {
 	this->rect = rect;
 	mouseZone.SetRect(rect);
